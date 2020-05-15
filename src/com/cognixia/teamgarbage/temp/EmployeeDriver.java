@@ -5,7 +5,8 @@ import com.cognixia.teamgarbage.main.Company;
 import com.cognixia.teamgarbage.main.Department;
 
 public class EmployeeDriver {
-
+}
+/*
 	public static void main(String[] args) {
 	
 // Company Class:
@@ -58,3 +59,4 @@ public class EmployeeDriver {
 	
 	}
 }
+*/

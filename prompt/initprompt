@@ -1,0 +1,9 @@
+Hello and welcome to the Employee Management System. Please enter in the number
+associated with an option below:
+----------------------------------------------------------
+|  (0) ---> Exit the application                         |
+|  (1) ---> Read Employee/Department data                |
+|  (2) ---> Update an Employee/Department                |
+|  (3) ---> Delete Employee/Department data              |
+|  (4) ---> Create a new Employee/Department             |
+----------------------------------------------------------

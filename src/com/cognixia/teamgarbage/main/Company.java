@@ -3,8 +3,8 @@ package com.cognixia.teamgarbage.main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Company {
-
+public class Company {}
+/*
 	// Attributes
 	private String companyName;
 	private List<Department> departments = new ArrayList<Department>();
@@ -83,3 +83,4 @@ public class Company {
 	}	
 	
 }
+ */
