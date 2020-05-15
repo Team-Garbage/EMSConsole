@@ -16,6 +16,7 @@ public class Department {
         this.deptId = -1;
         this.departmentName = departmentName;
         this.budget = budget;
+        this.employees = new ArrayList<>();
     }
 
     public Department(int deptId, String departmentName, double budget) {
