@@ -1,9 +1,6 @@
 package com.cognixia.teamgarbage.temp;
 
 
-import com.cognixia.teamgarbage.main.Company;
-import com.cognixia.teamgarbage.main.Department;
-
 public class EmployeeDriver {
 }
 /*

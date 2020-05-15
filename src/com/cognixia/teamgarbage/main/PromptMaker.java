@@ -6,7 +6,29 @@ import java.util.Scanner;
 
 public class PromptMaker {
 
-    public static int selectCRUD(Scanner userIn) {
+    private Scanner userIn;
+    private static PromptMaker pm;
+
+    private PromptMaker() {
+        this.userIn = userIn;
+    }
+
+    public static PromptMaker getPm() {
+        if (pm == null) {
+             pm = new PromptMaker();
+        }
+
+        return pm;
+    }
+
+    public Scanner getUserIn() {
+        return this.userIn;
+    }
+    public void setUserIn(Scanner userIn) {
+        this.userIn = userIn;
+    }
+
+    public int selectCRUD() {
         Scanner promptReader = null;
         int selection = -1;
 
@@ -31,11 +53,11 @@ public class PromptMaker {
         return selection;
     }
 
-    public static int selectEmpOrDept(Scanner userIn) {
+    public int selectEmpOrDept() {
         int option;
 
         System.out.println("Please specify if you are selecting and Employee or Department:\nDepartment(0)\nEmployee(1)");
-        option = userIn.nextInt();
+        option = this.userIn.nextInt();
 
         while (option < 0 || option > 1) {
             System.out.println("Invalid option: '" + option + "'. Please enter a valid response");

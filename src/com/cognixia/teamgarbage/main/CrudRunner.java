@@ -3,6 +3,7 @@ package com.cognixia.teamgarbage.main;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class CrudRunner {
@@ -17,7 +18,9 @@ public class CrudRunner {
         if (empOrDept == ConfigSetup.DEPT) {
             switch (crudType) {
                 case ConfigSetup.CREATE:
-                    createData(EMPFILE);
+                    HashMap map = convertDepartmentData(readData(DEPTFILE));
+                    Department dept = DataHandler.createDepartmentData(map);
+                    DataHandler.insertData(dept, DEPTFILE);
                     break;
                 case ConfigSetup.READ:
                     ArrayList<String[]> data = readData(DEPTFILE);
@@ -26,7 +29,28 @@ public class CrudRunner {
                 case ConfigSetup.UPDATE:
                     System.out.println("Yes");
                     break;
-                case ConfigSetup.DEPT:
+                case ConfigSetup.DELETE:
+                    System.out.println("No");
+                    break;
+                default:
+                    System.out.println("Lit");
+                    break;
+            }
+        } else if (empOrDept == ConfigSetup.EMP) {
+            switch (crudType) {
+                case ConfigSetup.CREATE:
+                    HashMap map = convertDepartmentData(readData(DEPTFILE));
+                    Department dept = DataHandler.createDepartmentData(map);
+                    DataHandler.insertData(dept, EMPFILE);
+                    break;
+                case ConfigSetup.READ:
+                    ArrayList<String[]> data = readData(DEPTFILE);
+                    DataHandler.printData(data, empOrDept);
+                    break;
+                case ConfigSetup.UPDATE:
+                    System.out.println("Yes");
+                    break;
+                case ConfigSetup.DELETE:
                     System.out.println("No");
                     break;
                 default:
@@ -37,8 +61,13 @@ public class CrudRunner {
 
     }
 
-    private static void createData(String empfile) {
-    }
+    /*
+    private static HashMap createDataFromFile(String filepath) {
+        ArrayList<String[]> data = readData(filepath);
+        HashMap map ;
+
+
+    }*/
 
     private static ArrayList<String[]> readData(String fileName) {
         Scanner reader = null;
@@ -55,5 +84,23 @@ public class CrudRunner {
         }
 
         return data;
+    }
+
+    private static HashMap convertEmployeeData(ArrayList<String[]> data) {
+        HashMap<Integer, Employee> emp = new HashMap<Integer, Employee>();
+        for (String[] rawData: data) {
+            emp.put(Integer.parseInt(rawData[0]), new Employee(Integer.parseInt(rawData[0]), rawData[1],
+                    rawData[2], Integer.parseInt(rawData[3])));
+        }
+        return emp;
+    }
+
+    private static HashMap convertDepartmentData(ArrayList<String[]> data) {
+        HashMap<Integer, Department> depts = new HashMap<Integer, Department>();
+        for (String[] rawData: data) {
+            depts.put(Integer.parseInt(rawData[0]), new Department(Integer.parseInt(rawData[0]), rawData[1], Double.parseDouble(rawData[2])));
+        }
+
+        return depts;
     }
 }

@@ -12,13 +12,15 @@ public class MainDriver {
         int selectCrud;
         int selectEmpDept;
         Scanner userIn = new Scanner(System.in);
+        PromptMaker pm = PromptMaker.getPm();
+        pm.setUserIn(userIn);
 
         while(true) {
-            selectCrud = PromptMaker.selectCRUD(userIn);
+            selectCrud = pm.selectCRUD();
 
             if (selectCrud == 0) break;
 
-            selectEmpDept = PromptMaker.selectEmpOrDept(userIn);
+            selectEmpDept = pm.selectEmpOrDept();
             CrudRunner.doWork(selectCrud, selectEmpDept);
             System.out.println("Would you like to continue with additional changes?\nYes(1)\nNo(0)");
 

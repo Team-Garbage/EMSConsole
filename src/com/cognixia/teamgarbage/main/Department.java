@@ -66,5 +66,8 @@ public class Department {
         return "Department [departmentID = " + this.deptId + ", departmentName = " + departmentName + ", budget = " + budget + "]";
     }
 
+    public String formattedData() {
+        return deptId + "," + departmentName + "," + budget;
+    }
 
 }

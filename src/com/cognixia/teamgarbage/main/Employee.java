@@ -18,6 +18,14 @@ public class Employee {
 		this.isWorking = false;
 	}
 
+	public Employee(int empId, String fName, String lName, int empType) {
+		this.empId = -1;
+		this.fName = fName;
+		this.lName = lName;
+		this.empType = empType;
+		this.isWorking = false;
+	}
+
 	// Employee Specific Methods
 	public void onTheClockCheck(int clockIn) throws Exception {
 		if (this.isWorking == true && clockIn == 1) {
@@ -92,10 +100,14 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee{" +
+		return "Employee [" +
 				"fName='" + fName + '\'' +
 				", lName='" + lName + '\'' +
 				", empId=" + empId +
-				'}';
+				']';
+	}
+
+	public String formattedData() {
+		return empId + "," + fName + "," + lName + "," + empType;
 	}
 }

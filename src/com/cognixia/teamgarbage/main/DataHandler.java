@@ -1,6 +1,9 @@
 package com.cognixia.teamgarbage.main;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class DataHandler {
 
@@ -22,5 +25,45 @@ public class DataHandler {
             }
             System.out.println("--------------------------------");
         }
+    }
+
+    public static Department createDepartmentData(HashMap map) {
+
+        Scanner scan = PromptMaker.getPm().getUserIn();
+        System.out.println("Please enter the Department ID");
+        int deptId = scan.nextInt();
+        if (!map.containsKey(deptId)) {
+            System.out.println("Department ID '" + deptId + "' does not exist");
+            createDepartmentData(map);
+        }
+
+        System.out.println("Enter Department Name");
+        String deptName = scan.nextLine();
+
+        System.out.println("Enter Budget");
+        Double budget = scan.nextDouble();
+
+        Department dept = new Department(deptId, deptName, budget);
+        return dept;
+
+    }
+
+    public static <T> void insertData(T item, String empfile) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(empfile, true));
+            if (item instanceof Department) {
+                Department dept = (Department) item;
+                bw.write(dept.formattedData());
+            } else if (item instanceof Employee) {
+                Employee emp = (Employee) item;
+                bw.write(emp.formattedData());
+            }
+            bw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
