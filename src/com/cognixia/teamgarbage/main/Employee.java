@@ -1,6 +1,7 @@
 package com.cognixia.teamgarbage.main;
 
-public abstract class Employee {
+public class Employee {
+
 	private String fName;
 	private String lName;
 	private int empId;
@@ -9,11 +10,12 @@ public abstract class Employee {
 	private int empType;
 	private boolean isWorking;
 
-	public Employee(String fName, String lName, int empType, Employee manager) {
+	public Employee(String fName, String lName, int empType) {
+		this.empId = -1;
 		this.fName = fName;
 		this.lName = lName;
 		this.empType = empType;
-		this.manager = manager;
+		this.isWorking = false;
 	}
 
 	// Employee Specific Methods
@@ -60,5 +62,40 @@ public abstract class Employee {
 		return empType;
 	}
 
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
 
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+
+	public void setMs(MonthShift ms) {
+		this.ms = ms;
+	}
+
+	public void setManager(Employee manager) {
+		this.manager = manager;
+	}
+
+	public void setEmpType(int empType) {
+		this.empType = empType;
+	}
+
+	public void setWorking(boolean working) {
+		isWorking = working;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"fName='" + fName + '\'' +
+				", lName='" + lName + '\'' +
+				", empId=" + empId +
+				'}';
+	}
 }

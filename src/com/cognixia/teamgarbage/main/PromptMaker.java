@@ -4,11 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class UserPrompter {
+public class PromptMaker {
 
-    public static int selectCRUD() {
+    public static int selectCRUD(Scanner userIn) {
         Scanner promptReader = null;
-        Scanner userIn = new Scanner(System.in);
         int selection = -1;
 
         try {
@@ -29,24 +28,21 @@ public class UserPrompter {
         }
 
         promptReader.close();
-
-        userIn.close();
         return selection;
     }
 
-    public static int selectEmpOrDept() {
-        Scanner userIn = new Scanner(System.in);
+    public static int selectEmpOrDept(Scanner userIn) {
         int option;
 
-        System.out.println("Please specify if you are choosing an Employee or Department");
+        System.out.println("Please specify if you are selecting and Employee or Department:\nDepartment(0)\nEmployee(1)");
         option = userIn.nextInt();
 
-        while (option != 0 || option != 1) {
+        while (option < 0 || option > 1) {
             System.out.println("Invalid option: '" + option + "'. Please enter a valid response");
             option = userIn.nextInt();
         }
 
-        userIn.close();
         return option;
     }
+
 }

@@ -1,0 +1,5 @@
+0,Inventory/Merchandise,100000
+1,Marketing,200145
+2,Logistics,56956
+3,Customer Services,548352
+4,Finance,4873152
