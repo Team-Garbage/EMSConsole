@@ -1,7 +1,9 @@
 package com.cognixia.teamgarbage.main;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class PromptMaker {
@@ -67,4 +69,24 @@ public class PromptMaker {
         return option;
     }
 
+    public HashMap getDeptToUpdate(HashMap<Integer, Department> map) {
+        System.out.println("Please enter the ID of the element you would like to update");
+        int id = userIn.nextInt();
+        Department dp = map.get(id);
+
+        while (!map.containsKey(id)) {
+            System.out.println("Please enter an existing Dept ID");
+            id = userIn.nextInt();
+        }
+
+        userIn.nextLine();
+        System.out.println("Please enter a new Department name");
+        dp.setDepartmentName(userIn.nextLine());
+
+        System.out.println("Please enter a new Budget");
+        dp.setBudget(userIn.nextDouble());
+
+        map.put(id, dp);
+        return map;
+    }
 }

@@ -32,12 +32,13 @@ public class DataHandler {
         Scanner scan = PromptMaker.getPm().getUserIn();
         System.out.println("Please enter the Department ID");
         int deptId = scan.nextInt();
-        if (!map.containsKey(deptId)) {
-            System.out.println("Department ID '" + deptId + "' does not exist");
-            createDepartmentData(map);
+        while (map.containsKey(deptId)) {
+            System.out.println("Department ID '" + deptId + "' already exists. Please enter a different ID");
+            deptId = scan.nextInt();
         }
 
         System.out.println("Enter Department Name");
+        scan.nextLine();
         String deptName = scan.nextLine();
 
         System.out.println("Enter Budget");
@@ -56,11 +57,41 @@ public class DataHandler {
                 bw.write(dept.formattedData());
             } else if (item instanceof Employee) {
                 Employee emp = (Employee) item;
+                bw.newLine();
                 bw.write(emp.formattedData());
+                bw.newLine();
             }
             bw.close();
+            System.out.println(item.toString() + " has been entered!");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void updateData(HashMap map, String fileNm, int mode) {
+        try {
+
+            File temp = new File("data/temp.txt");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+            if (mode == ConfigSetup.DEPT) {
+                HashMap<Integer, Department> map2 = (HashMap<Integer, Department>) map;
+                map.forEach((id, dept) -> {
+                   Department dp = (Department) map2.get(id);
+                    try {
+                        bw.write(dp.formattedData() + "\n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                File del = new File(fileNm);
+                del.delete();
+                temp.renameTo(new File(fileNm));
+                bw.close();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

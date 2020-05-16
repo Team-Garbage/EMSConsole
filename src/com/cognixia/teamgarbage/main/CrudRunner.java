@@ -14,20 +14,25 @@ public class CrudRunner {
 
     public static void doWork(int crudType, int empOrDept) {
         File dataFile;
-
+        HashMap map;
+        ArrayList<String[]> data;
         if (empOrDept == ConfigSetup.DEPT) {
             switch (crudType) {
                 case ConfigSetup.CREATE:
-                    HashMap map = convertDepartmentData(readData(DEPTFILE));
+                    map = convertDepartmentData(readData(DEPTFILE));
                     Department dept = DataHandler.createDepartmentData(map);
                     DataHandler.insertData(dept, DEPTFILE);
                     break;
                 case ConfigSetup.READ:
-                    ArrayList<String[]> data = readData(DEPTFILE);
+                    data = readData(DEPTFILE);
                     DataHandler.printData(data, empOrDept);
                     break;
                 case ConfigSetup.UPDATE:
-                    System.out.println("Yes");
+                    data = readData(DEPTFILE);
+                    DataHandler.printData(data, empOrDept);
+                    map = convertDepartmentData(readData(DEPTFILE));
+                    map = PromptMaker.getPm().getDeptToUpdate(map);
+                    DataHandler.updateData(map, DEPTFILE, ConfigSetup.DEPT);
                     break;
                 case ConfigSetup.DELETE:
                     System.out.println("No");
@@ -39,12 +44,12 @@ public class CrudRunner {
         } else if (empOrDept == ConfigSetup.EMP) {
             switch (crudType) {
                 case ConfigSetup.CREATE:
-                    HashMap map = convertDepartmentData(readData(DEPTFILE));
+                    map = convertDepartmentData(readData(DEPTFILE));
                     Department dept = DataHandler.createDepartmentData(map);
                     DataHandler.insertData(dept, EMPFILE);
                     break;
                 case ConfigSetup.READ:
-                    ArrayList<String[]> data = readData(DEPTFILE);
+                    data = readData(DEPTFILE);
                     DataHandler.printData(data, empOrDept);
                     break;
                 case ConfigSetup.UPDATE:
